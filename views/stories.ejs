@@ -1,0 +1,19 @@
+<%- include ('partials/appHeader') %>
+
+<div class="story-container">
+    <div class="story-form">
+        <form action="/story" method="post">
+            <input type="text" name="story" placeholder="Create story" maxlength="100">
+            <button type="submit">POST</button>
+    </div>
+    <div class="wrapper">
+        <%posts.forEach(function(post) { %>
+            <div class="story">
+                <p><%= post.user%>:</p>
+                <h3><%= post.post%></h3>
+            </div>
+        <%})%>
+    </div>
+</div>
+</form>
+<%- include ('partials/appFooter') %>

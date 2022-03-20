@@ -1,0 +1,28 @@
+  <%- include('partials/introHeader') -%>)
+  <header>
+    <a class="logo" href="/"><i class="fa fa-solid fa-key"></i> SECRET</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/login" class="active">Log In</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+  </header>
+
+  <div class="login">
+    <h1>Log In</h1>
+    <a href="/auth/google" type='button'><i class="fab fa-google"></i>  Log In with Google</a>
+    <h3>OR</h3>
+    <hr>
+    <form class="login-form" action="/login" method="post">
+      <input type="text" name="username" value="" placeholder="Username">
+      <input type="password" name="password" value="" placeholder="Password">
+      <button type="submit" name="login-button">Log In</button>
+    </form>
+  </div>
+
+  <%- include('partials/footer'); -%>
+
+<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>

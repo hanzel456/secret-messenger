@@ -1,0 +1,32 @@
+<%- include ('partials/appHeader') %> 
+<p style="display: none;" class="page">home</p>
+<h1 class="heading">Welcome <span class="user-span"><%=user.username%></span></h1>
+<div class="content">
+      <a href="/contacts">
+        <img src="images/contacts.svg" alt="contacts">
+        <h2>Contacts</h2>
+      </a>
+      <a href="/story">
+        <img src="images/posts.svg" alt="posts">
+        <h2>Stories</h2>
+      </a>
+    </div>
+
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      let page = document.querySelector('.page');
+      let element = document.querySelector('.home')
+      if (page.innerHTML === 'home'){
+        element.classList.add('active')
+      }
+      </script>
+</body>
+</html>
