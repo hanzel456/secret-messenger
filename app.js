@@ -189,7 +189,7 @@ let currentName;
 let bot = 'Secret Chat Bot'
 io.on('connection', socket =>{
       //send to current client
-  socket.emit('message', formatMessage(bot, 'Welcome to secret chat!'));
+  socket.emit('message', formatMessage(bot, 'Welcome to secret chat! Your messages will be deleted after the session.'));
   //send to everyone except current client
   socket.broadcast.emit('message', formatMessage(bot, currentName + ' has joined the chat.'));
 
