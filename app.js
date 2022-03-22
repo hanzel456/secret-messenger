@@ -1,5 +1,4 @@
 //jshint esversion:6
-const port = 3000
 require('dotenv').config();
 const http = require('http')
 const express = require("express");
@@ -224,6 +223,11 @@ app.get('/logout', function(req,res){
   req.logout();
   res.redirect('/');
 });
+
+const port = process.env.PORT;
+if (port == null || port == ""){
+  port = 3000;
+}
 
 server.listen(port, function () {
   console.log("server operational");
