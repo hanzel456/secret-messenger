@@ -1,11 +1,11 @@
+const moment = require ('moment-timezone');
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 function formatMessage (userName, text) {
     return{
         userName,
         text,
-        time:new Date().toLocaleTimeString('default', {
-            hour: '2-digit',
-            minute: '2-digit'
-        })
+        time: moment().tz(timezone).format('hh:mm a')
     };
 };
 module.exports = formatMessage;
