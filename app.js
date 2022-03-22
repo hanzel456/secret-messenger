@@ -224,10 +224,7 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
-const port = process.env.PORT;
-if (port == null || port == ""){
-  port = 3000;
-}
+let port = process.env.PORT || 3000;
 
 server.listen(port, function () {
   console.log("server operational");
