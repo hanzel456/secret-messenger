@@ -151,26 +151,26 @@ app.route('/story')
   if(req.isAuthenticated()){
     Post.find({}, function(err, posts){
       if(!err){
-        res.render('Stories',{posts: posts});
+        res.render('stories',{posts: posts});
       }
     });
   } else {
     res.redirect('login');
   }
-});
-// .post((req, res) => {
-//   const storyUser = req.user.username;
-//   const newPost = new Post ({
-//     post: req.body.story,
-//     user: storyUser
-//   });
+})
+.post((req, res) => {
+  const storyUser = req.user.username;
+  const newPost = new Post ({
+    post: req.body.story,
+    user: storyUser
+  });
 
-//   newPost.save( err => {
-//     if(!err){
-//       res.redirect('/story')
-//     }
-//   });
-// });
+  newPost.save( err => {
+    if(!err){
+      res.redirect('/story');
+    }
+  });
+});
 
 app.route('/contacts')
 .get((req, res) => {
