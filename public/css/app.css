@@ -121,10 +121,12 @@ body{
   color: #fff;
 }
 
+/* contacts */
+
 .contact-header{
   font-size: 4em;
   text-align: center;
-  margin: 1em 1em;
+  margin: 1em;
   color: #cadfec;
   border-bottom: 10px dotted #e13c2c;
 }
@@ -171,6 +173,18 @@ body{
   text-decoration: none;
 }
 
+@media screen and (max-width:600px) {
+  .contact-header{
+    font-size: 3em;
+    margin: 1em 0;
+  }
+
+  .contact-wrapper{
+    margin: 0;
+    justify-content: center;
+  }
+}
+
 /* chat */
 
 .chat-container {
@@ -208,6 +222,9 @@ body{
 @media screen and (max-width:600px){
   .chat-sidebar{
     padding: 0;
+  }
+  #users{
+    margin-right: 0.5em;
   }
 }
 

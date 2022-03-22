@@ -9,15 +9,16 @@ socket.on('message', function(message){
 });
 
 
-//submit message
+//submit user message
 
 const chatForm = document.getElementById('chat-form');
 
 chatForm.addEventListener('submit', (evt)=> {
     evt.preventDefault();
     let msg = evt.target.elements.msg.value;
-    //emit the user message to server
-    socket.emit('chatMessage', msg);
+    let sender = document.getElementById('currentUser').innerHTML
+    //emit the user message and sender to server
+    socket.emit('chatMessage', {sender, msg});
 
     // clear input
     evt.target.elements.msg.value = "";
@@ -27,8 +28,6 @@ chatForm.addEventListener('submit', (evt)=> {
 //add messages to dom
 
 function messageOutput (message) {
-    console.log(message);
-    // let currentUser = document.getElementById('currentUser').innerHTML
     const div = document.createElement('div');
     div.classList.add('message');
     div.innerHTML= `<p class='meta'>${message.userName} <span>${message.time}</span></p>

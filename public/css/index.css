@@ -164,14 +164,15 @@ footer{
   }
 
   #text{
-    margin: 0;
-    right: 15px;
-    font-size: 4rem;
+    right: 10px;
+    margin: 0 0.5em;
+    font-size: 3em;
   }
 
   #btn{
     white-space: nowrap;
     transform: translate(10px,90px);
+    z-index: 1000;
   }
 
   #about{

@@ -74,7 +74,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/google/home",
+  callbackURL: "https://messenger456.herokuapp.com/auth/google/home",
 },
 function(accessToken, refreshToken, profile, cb) {
   currentUserGoogle = profile.name.givenName; //name from google
@@ -198,8 +198,8 @@ io.on('connection', socket =>{
     io.emit('message', formatMessage(bot, currentName + ' has left the chat.'));
   });
 
-  socket.on('chatMessage', (msg)=>{
-    io.emit('message', formatMessage(currentName, msg));
+  socket.on('chatMessage', ({sender, msg})=>{
+    io.emit('message', formatMessage(sender , msg));
   });
 });
 
@@ -208,7 +208,7 @@ app.route('/chat/:user')
   if(req.isAuthenticated()){
   const param = req.params.user;
   const currentUser = req.user.username;
-  currentName = currentUser;
+  currentName  = currentUser
   User.findById(param, function(err, user){
     if(!err){
       res.render('chat', {user:user, currentUser:currentUser});
