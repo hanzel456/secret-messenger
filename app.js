@@ -153,7 +153,7 @@ app.route('/story')
       if(!err){
         res.render('Stories',{posts: posts});
       }
-    })
+    });
   } else {
     res.redirect('login');
   }
