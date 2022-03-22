@@ -1,8 +1,10 @@
 //jshint esversion:6
+const port = 3000
 require('dotenv').config();
+const http = require('http')
 const express = require("express");
+const socketio = require('socket.io');
 const app = express();
-const port = 3000;
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -12,10 +14,16 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 //lvl 6 oauth
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+//chat
+const path = require('path');
+const server = http.createServer(app);
+const io = socketio(server);
+const formatMessage = require('./utils/messages');
 
 app.use("/favicon.ico", express.static("public/images/favicon.ico"));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.urlencoded({extended:true}));
 //passport local: placement above mongoose connect important.
 app.use(session({
@@ -28,7 +36,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost:27017/messenger');
+mongoose.connect('mongodb+srv://hanzi456:Anila123@cluster0.mxm6i.mongodb.net/messenger?retryWrites=true&w=majority');
 
 userSchema = new mongoose.Schema({
   username:String,
@@ -167,14 +175,56 @@ app.route('/story')
 
 app.route('/contacts')
 .get((req, res) => {
-  res.render('contacts')
-})
+  if(req.isAuthenticated()){
+  const currentUser = req.user;
+  User.find({}, function(err , users){
+    res.render('contacts', {users:users, currentUser:currentUser});
+  });
+} else {
+  res.redirect('login');
+}
+});
+
+//live chat
+let currentName;
+let bot = 'Secret Chat Bot'
+io.on('connection', socket =>{
+      //send to current client
+  socket.emit('message', formatMessage(bot, 'Welcome to secret chat!'));
+  //send to everyone except current client
+  socket.broadcast.emit('message', formatMessage(bot, currentName + ' has joined the chat.'));
+
+  socket.on('disconnect', function(){
+    //send to everyone
+    io.emit('message', formatMessage(bot, currentName + ' has left the chat.'));
+  });
+
+  socket.on('chatMessage', (msg)=>{
+    io.emit('message', formatMessage(currentName, msg));
+  });
+});
+
+app.route('/chat/:user')
+.get((req,res) =>{
+  if(req.isAuthenticated()){
+  const param = req.params.user;
+  const currentUser = req.user.username;
+  currentName = currentUser;
+  User.findById(param, function(err, user){
+    if(!err){
+      res.render('chat', {user:user, currentUser:currentUser});
+    };
+  });
+} else {
+  res.redirect('/login')
+}
+});
 
 app.get('/logout', function(req,res){
   req.logout();
   res.redirect('/');
 });
 
-app.listen(port, function () {
+server.listen(port, function () {
   console.log("server operational");
 });

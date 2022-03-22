@@ -1,3 +1,30 @@
 <%-include('partials/appHeader')%>
-<h1>hello contacts</h1>
+<p style="display: none;" class="page">contacts</p>
+<h1 class="contact-header">Your contacts</h1>
+<div class="contact-wrapper">
+    <%users.forEach(user => { %>
+        <%if(user.username !== currentUser.username){%>
+            <div class="contact">
+                <a href="/chat/<%= user.id %>">
+                <h1 class="contact-display"><%= user.username.substring(0,1) %></h1>
+                <p><%=user.username%></p>
+            </a>
+            </div>
+        <%};%>
+    <%});%>
+
+    <div class="add-contact">
+        <a href="mailto:?subject=You've been invited to secret messenger!&body=Sign up now at www.test.com">
+            <h1 class="contact-display">+</h1>
+            <p>Add</p>
+        </a>
+    </div>
+</div>
+<script>
+      let page = document.querySelector('.page');
+      let element = document.querySelector('.contacts')
+      if (page.innerHTML == element.innerHTML.toLowerCase()){
+        element.classList.add('active');
+      }
+</script>
 <%-include('partials/appFooter')%>

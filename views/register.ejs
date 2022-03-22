@@ -13,8 +13,8 @@
   <h3>OR</h3>
   <hr>
   <form class="login-form" action="/register" method="post">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" value="" placeholder="Password">
+    <input type="text" name="username" placeholder="Username" min="3" max="10" required>
+    <input type="password" name="password" value="" placeholder="Password" min="4" required>
     <button type="submit" name="login-button">Register</button>
   </form>
 </div>

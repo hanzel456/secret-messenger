@@ -14,8 +14,8 @@
     <h3>OR</h3>
     <hr>
     <form class="login-form" action="/login" method="post">
-      <input type="text" name="username" value="" placeholder="Username">
-      <input type="password" name="password" value="" placeholder="Password">
+      <input type="text" name="username" value="" placeholder="Username" min="3" max="10" required>
+      <input type="password" name="password" value="" placeholder="Password" min="4" required>
       <button type="submit" name="login-button">Log In</button>
     </form>
   </div>

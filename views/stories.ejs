@@ -1,5 +1,5 @@
 <%- include ('partials/appHeader') %>
-
+<p style="display: none;" class="page">stories</p>
 <div class="story-container">
     <div class="story-form">
         <form action="/story" method="post">
@@ -16,4 +16,12 @@
     </div>
 </div>
 </form>
+
+<script>
+    let page = document.querySelector('.page');
+    let element = document.querySelector('.stories')
+    if (page.innerHTML == element.innerHTML.toLowerCase()){
+      element.classList.add('active');
+    }
+</script>
 <%- include ('partials/appFooter') %>
