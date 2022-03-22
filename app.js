@@ -18,7 +18,6 @@ const path = require('path');
 const server = http.createServer(app);
 const io = socketio(server);
 const formatMessage = require('./utils/messages');
-const moment = require('moment')
 
 app.use("/favicon.ico", express.static("public/images/favicon.ico"));
 app.set("view engine", "ejs");
