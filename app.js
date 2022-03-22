@@ -146,30 +146,34 @@ app.route('/home')
   }
 });
 
-app.route('/story')
-.get((req, res) => {
-  if(req.isAuthenticated()){
-    Post.find({}, function(err, posts){
-      if(!err){
-        res.render('Stories',{posts: posts});
-      }
-    })
-  } else {
-    res.redirect('login');
-  }
-})
-.post((req, res) => {
-  const storyUser = req.user.username;
-  const newPost = new Post ({
-    post: req.body.story,
-    user: storyUser
-  });
+// app.route('/story')
+// .get((req, res) => {
+//   if(req.isAuthenticated()){
+//     Post.find({}, function(err, posts){
+//       if(!err){
+//         res.render('Stories',{posts: posts});
+//       }
+//     })
+//   } else {
+//     res.redirect('login');
+//   }
+// })
+// .post((req, res) => {
+//   const storyUser = req.user.username;
+//   const newPost = new Post ({
+//     post: req.body.story,
+//     user: storyUser
+//   });
 
-  newPost.save( err => {
-    if(!err){
-      res.redirect('/story')
-    }
-  });
+//   newPost.save( err => {
+//     if(!err){
+//       res.redirect('/story')
+//     }
+//   });
+// });
+
+app.get('/story', function(req, res){
+  res.redirect('/register');
 });
 
 app.route('/contacts')
